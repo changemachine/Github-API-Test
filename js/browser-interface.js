@@ -1,14 +1,4 @@
-
-var dataLoad = function(data){
-  var repos = [];
-
-  for (var i = 0; i < data.length; i++) {
-    var repo = {};
-    repo.name = data[i].name;
-    $("#repos").append("<li class='even'>" + repo.name + "</li>");
-    // repos.push(repo);
-  }
-};
+var dataLoad = require('./../js/dataLoad-interface.js').dataLoad;
 
 
 $(function() {
