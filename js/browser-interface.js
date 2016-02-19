@@ -2,10 +2,10 @@
 var dataLoad = function(data){
   var repos = [];
 
-  for (var i = 0; i <= data.length; i++) {
+  for (var i = 0; i < data.length; i++) {
     var repo = {};
     repo.name = data[i].name;
-    console.log("Repo: " + repo.name);
+    $("#repos").append("<li class='even'>" + repo.name + "</li>");
     // repos.push(repo);
   }
 };

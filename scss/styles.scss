@@ -1,9 +1,16 @@
+$odd : #d3d3d3;
+$even: #1e1e1e;
+
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  color: red;
 }
 
-#map {
-  height: 100%;
+.even {
+  background: red;
+  // .even {
+  //   background: even;
+  // }
 }
