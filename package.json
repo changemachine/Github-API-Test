@@ -1,12 +1,12 @@
 {
-  "name": "clock-alarm",
-  "version": "1.0.0",
-  "description": "",
+  "name": "github-api-test",
+  "version": "0.0.1",
+  "description": "Retrieves Github user commits via API",
   "main": "index.js",
   "scripts": {
     "test": "mocha specs"
   },
-  "author": "",
+  "author": "James Nielson",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {

@@ -1,17 +1,16 @@
-var gulp = require('gulp');
 var browserify = require('browserify');
-var source = require('vinyl-source-stream');
-var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
-var utilities = require('gulp-util');
-var buildProduction = utilities.env.production;
-var del = require('del');
-var jshint = require('gulp-jshint');
 var browserSync = require('browser-sync').create();
 var chai = require('chai');
+var concat = require('gulp-concat');
+var del = require('del');
+var gulp = require('gulp');
+var jshint = require('gulp-jshint');
 var mocha = require('mocha');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
+var source = require('vinyl-source-stream');
+var uglify = require('gulp-uglify');
+var utilities = require('gulp-util');
 var lib = require('bower-files')({
   "overrides":{
     "bootstrap" : {
@@ -23,6 +22,8 @@ var lib = require('bower-files')({
     }
   }
 });
+
+var buildProduction = utilities.env.production;
 
 gulp.task('jshint', function(){
   return gulp.src(['js/*.js'])
@@ -53,15 +54,6 @@ gulp.task("clean", function(){
   return del(['build', 'tmp']);
 });
 
-gulp.task('cssBuild', function() {
-  return gulp.src('scss/*.scss')
-    .pipe(sourcemaps.init())
-    .pipe(sass())
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./build/css'))
-    .pipe(browserSync.stream());
-});
-
 gulp.task("build", ['clean'], function(){
   if (buildProduction) {
     gulp.start('minifyScripts');
@@ -70,6 +62,15 @@ gulp.task("build", ['clean'], function(){
   }
   gulp.start('bower');
   gulp.start('cssBuild');
+});
+
+gulp.task('cssBuild', function() {
+  return gulp.src('scss/*.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass())
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./build/css'))
+    .pipe(browserSync.stream());
 });
 
 gulp.task('jsBower', function () {
@@ -86,17 +87,6 @@ gulp.task('cssBower', function () {
 });
 
 gulp.task('bower', ['jsBower', 'cssBower']);
-
-gulp.task('serve', function() {
-  browserSync.init({
-    server: {
-      baseDir: "./",
-      index: "index.html"
-    }
-  });
-
-  gulp.watch(['js/*.js'], ['jsBuild']);
-});
 
 gulp.task('jsBuild', ['jsBrowserify', 'jshint'], function(){
   browserSync.reload();
@@ -119,8 +109,8 @@ gulp.task('bowerBuild', ['bower'], function(){
   browserSync.reload();
 });
 
-gulp.task('test', function() {})
-
 gulp.task('htmlBuild', function(){
   browserSync.reload();
 });
+
+// gulp.task('test', function() {});
